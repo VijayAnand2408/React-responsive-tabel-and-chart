@@ -11,3 +11,9 @@ export const revenueTypeFilter = value => {
         dispatch({type: revenueReducerConstant.REVENUE_TYPE_FILTER, value});
     }
 }
+
+export const filteredData = value => {
+    return dispatch => {
+        dispatch({type: revenueReducerConstant.FILTERED_DATA, value});
+    }
+}

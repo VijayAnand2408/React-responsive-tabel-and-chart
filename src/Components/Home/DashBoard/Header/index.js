@@ -1,7 +1,7 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, makeStyles, InputLabel, MenuItem, Select, TextField, FormControl, Typography } from '@material-ui/core';
-import { useSelector,useDispatch } from 'react-redux'
-import {revenueTypeFilter} from '../../../../store/action/revenueAction'
+import { useSelector, useDispatch } from 'react-redux'
+import { revenueTypeFilter } from '../../../../store/action/revenueAction'
 
 
 const styleClasses = makeStyles({
@@ -34,25 +34,13 @@ function Header() {
     const dispatch = useDispatch();
 
     const { userName } = useSelector(state => state.user);
-    const { revenueData } = useSelector(state => state.revenue);
 
-    const [revenueType] = useState([
-        'Revenue Type -1',
-        'Revenue Type -4',
-        'Revenue Type -5',
-        'Revenue Type -6',
-        'Revenue Type -7',
-        'Revenue Type -11',
-    ])
-    const [selectRevenueType,setSelectRevenueType]  = useState('')
-
-
-    
+    const [selectRevenueType, setSelectRevenueType] = useState('')
 
     return (
         <Grid className={classes.root}>
             <Grid container>
-                <Grid item xs={6} className={classes.alignCenter}  style={{ height: '100%', marginTop: '1rem' }}>
+                <Grid item xs={6} className={classes.alignCenter} style={{ height: '100%', marginTop: '1rem' }}>
                     <Grid item xs={6}>
                         <FormControl fullWidth>
                             <InputLabel

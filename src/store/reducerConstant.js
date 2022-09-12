@@ -4,5 +4,6 @@ export const userReducerConstant = {
 
 export const revenueReducerConstant = {
     REVENUE_DATA:'REVENUE_DATA',
-    REVENUE_TYPE_FILTER:'REVENUE_TYPE_FILTER'
+    REVENUE_TYPE_FILTER:'REVENUE_TYPE_FILTER',
+    FILTERED_DATA:'FILTERED_DATA'
 }

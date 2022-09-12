@@ -2,7 +2,8 @@ import { revenueReducerConstant } from "../reducerConstant";
 
 const initialState = {
     revenueData: '',
-    filterType:''
+    filterType:'',
+    filterData:[]
 };
 
 const revenueReducer = (state = initialState, action = {}) => {
@@ -17,6 +18,11 @@ const revenueReducer = (state = initialState, action = {}) => {
                     ...state,
                     filterType: action.value
                 };
+                case revenueReducerConstant.FILTERED_DATA:
+                    return {
+                        ...state,
+                        filterData: action.value
+                    };
         default:
             return state;
     }

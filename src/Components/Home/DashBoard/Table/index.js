@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import {
-    TableCell, CircularProgress, Checkbox, Grid,
-    Toolbar,
-    Typography,
-    IconButton,
-    Tooltip,
-    Box,
+    TableCell,
     TablePagination,
     Table,
     TableBody,
     TableContainer,
     TableHead,
     TableRow,
+    Grid,
 } from '@material-ui/core';
 
-import { storeRevenueData } from '../../../../store/action/revenueAction'
+import { storeRevenueData,filteredData } from '../../../../store/action/revenueAction'
 
 function RevenueTable() {
     const { revenueData, filterType } = useSelector(state => state.revenue);
@@ -29,7 +25,6 @@ function RevenueTable() {
 
 
     const setDataPagination = () => {
-        const table = (filterType === '' || filterType === 'All Renenue Type') ? revenueData : filterRevenueTableData;
         const pageStaringIndex = Page * dataRowPerPage;
         const slicedData = filterRevenueTableData.slice(pageStaringIndex, pageStaringIndex + dataRowPerPage)
         setRevenueTableDate(slicedData)
@@ -54,16 +49,20 @@ function RevenueTable() {
         if ((filterType === '' || filterType === 'All Renenue Type')) {
             setFilterRevenueTableDate(revenueData);
         } else {
-            const filteredData = [];
+            const filteredDataArr = [];
             revenueData.length > 0 && revenueData?.map((row) => {
                 if (row?.revenue_type === filterType) {
-                    filteredData.push(row);
+                    filteredDataArr.push(row);
                 }
             })
-            setFilterRevenueTableDate(filteredData);
+            setFilterRevenueTableDate(filteredDataArr);
         }
     }, [filterType])
 
+    useEffect(() => {
+       dispatch(filteredData(filterRevenueTableData))
+    }, [filterRevenueTableData])
+    
 
     useEffect(() => {
         if (revenueTableDate.length === 0) {
@@ -77,10 +76,10 @@ function RevenueTable() {
     }, [])
 
     return (
-        <>
-            <TableContainer>
+        <Grid style={{marginTop:'10rem',marginBottom:'10rem'}}>
+            <TableContainer >
                 <Table>
-                    <TableHead>
+                    <TableHead style={{background: '#0E86D4'}}>
                         <TableRow>
                             <TableCell>S No.</TableCell>
                             <TableCell>Line of Business</TableCell>
@@ -122,7 +121,7 @@ function RevenueTable() {
                 onChangePage={(event, newPage) => setPage(newPage)}
                 onChangeRowsPerPage={(event) => { setPage(0); setDataRowPerPage(parseInt(event.target.value, 10)); }}
             />
-        </>
+        </Grid>
     )
 }
 
